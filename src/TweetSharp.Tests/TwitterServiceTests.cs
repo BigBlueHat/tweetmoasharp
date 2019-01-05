@@ -1861,7 +1861,25 @@ namespace TweetSharp.Tests.Service
 			Assert.IsNotNull(result.Apps);
 			Assert.Greater(result.Apps.Count, 0);
 			Assert.IsTrue(result.Apps.Any());
+		}
 
+		[Test]
+		public void Can_List_DirectMessages_WithCursor()
+		{
+			var service = GetAuthenticatedService();
+
+			TwitterDirectMessageListResult result = null;
+			int requestCount = 0;
+			while (requestCount < 2)
+			{
+				result = service.ListDirectMessages(new ListDirectMessagesOptions() { Count = 1, Cursor = result?.NextCursor });
+				requestCount++;
+
+				AssertResultWas(service, HttpStatusCode.OK);
+				Assert.IsNotNull(result);
+				Assert.IsNotNull(result.Events);
+				Assert.Greater(result.Events.Count(), 0);
+			}
 		}
 
 		[Test]
