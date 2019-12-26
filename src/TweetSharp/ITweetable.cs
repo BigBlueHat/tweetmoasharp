@@ -6,6 +6,7 @@ namespace TweetSharp
 	{
 		long Id { get; }
 		string Text { get; }
+		string FullText { get; }
 		string TextAsHtml { get; }
 		ITweeter Author { get; }
 		DateTime CreatedDate { get; }

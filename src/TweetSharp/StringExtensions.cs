@@ -174,7 +174,8 @@ namespace TweetSharp
 
 		public static string LegacyTextAsHtml(this ITweetable tweetable)
 		{
-			return !string.IsNullOrEmpty(tweetable.Text) ? tweetable.Text.ParseTwitterageToHtml() : tweetable.Text;
+			var text = string.IsNullOrEmpty(tweetable.Text) ? tweetable.FullText : tweetable.Text;
+			return !string.IsNullOrEmpty(text) ? text.ParseTwitterageToHtml() : text;
 		}
 
 		public static string ParseTextWithEntities(this ITweetable tweetable)
@@ -187,16 +188,21 @@ namespace TweetSharp
 			//Twitter entity indices are *character* based, but .Net string functions seem to be 
 			//*byte* based, regardless of what any particular doc says. This function returns an array mapping character
 			//positions to their first byte, so we'll use it to map the character positions to byte positions.
-			var characterMap = System.Globalization.StringInfo.ParseCombiningCharacters(tweetable.Text);
+			var tweetText = tweetable.FullText;
+			if (String.IsNullOrEmpty(tweetText))
+				tweetText = tweetable.Text;
 
-			var builder = new StringBuilder(tweetable.Text);
+			if (String.IsNullOrEmpty(tweetText)) return tweetText;
+			var characterMap = System.Globalization.StringInfo.ParseCombiningCharacters(tweetText);
+
+			var builder = new StringBuilder(tweetText);
 			var list = new List<TextChange>();
 			foreach (var entity in tweetable.Entities)
 			{
 
 				//Convert the character based indicies to byte positions and calculate length of item in bytes.
 				var startByteIndex = characterMap[entity.StartIndex];
-				var endByteIndex = entity.EndIndex >= characterMap.Length ? tweetable.Text.Length : characterMap[entity.EndIndex];
+				var endByteIndex = entity.EndIndex >= characterMap.Length ? tweetText.Length : characterMap[entity.EndIndex];
 				var lengthInBytes = endByteIndex - startByteIndex;
 
 				var mention = entity as TwitterMention;

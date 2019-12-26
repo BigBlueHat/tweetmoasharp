@@ -1051,6 +1051,17 @@ namespace TweetSharp.Tests.Service
 		}
 
 		[Test]
+		public void Can_parse_fulltext_as_html_when()
+		{
+			var service = GetAuthenticatedService();
+			var tweet = service.GetTweet(new GetTweetOptions() { Id = 637228279825608706, TweetMode = TweetMode.Extended });
+
+			Assert.IsNotNull(tweet.Entities);
+			Assert.AreEqual(3, tweet.Entities.Count());
+			Assert.AreEqual("Heerlijk! 😋 Wij kijken er naar uit 😋 Thnx voor dit supermooie initiatief 👍🏻 <a href=\"https://twitter.com/degoudenaar\" target=\"_blank\">@degoudenaar</a> <a href=\"https://twitter.com/search?q=SlagerijvanHoof\" target=\"_blank\">#SlagerijvanHoof</a> <a href=\"https://twitter.com/brabantsedag/status/637195781049581568\" target=\"_blank\">https://t.co/W2TeREt0Hd</a>", tweet.TextAsHtml);
+		}
+
+		[Test]
 		public void Can_coalesce_entities_on_timeline()
 		{
 			var service = GetAuthenticatedService();
@@ -1188,6 +1199,50 @@ namespace TweetSharp.Tests.Service
 			finally
 			{
 				service.DeleteList(new DeleteListOptions() { ListId = list.Id });
+			}
+		}
+
+		[Test]
+		public async Task Can_add_multiplelistusersasync()
+		{
+			var service = GetAuthenticatedService();
+			var list = await service.CreateListAsync(new CreateListOptions() { Name = "SecondTestList" });
+			try
+			{
+				Assert.IsNotNull(list);
+
+				var result = await service.AddListMembersAsync(new AddListMembersOptions() { ListId = list.Value.Id, ScreenName = new string[] { "yortw", "mrs_yort" } });
+				Assert.IsNotNull(result);
+				Thread.Sleep(50); // Twitter needs a little time to update the list
+				var members = await service.ListListMembersAsync(new ListListMembersOptions() { ListId = result.Value.Id });
+				Assert.IsNotNull(members);
+				Assert.AreEqual(2, members.Value.Count);
+			}
+			finally
+			{
+				service.DeleteList(new DeleteListOptions() { ListId = list.Value.Id });
+			}
+		}
+
+		[Test]
+		public async Task Can_add_listusersasync()
+		{
+			var service = GetAuthenticatedService();
+			var list = await service.CreateListAsync(new CreateListOptions() { Name = "SecondTestList" });
+			try
+			{
+				Assert.IsNotNull(list);
+
+				var result = await service.AddListMemberAsync(new AddListMemberOptions() { ListId = list.Value.Id, ScreenName ="yortw" });
+				Assert.IsNotNull(result);
+				Thread.Sleep(50); // Twitter needs a little time to update the list
+				var members = await service.ListListMembersAsync(new ListListMembersOptions() { ListId = result.Value.Id });
+				Assert.IsNotNull(members);
+				Assert.AreEqual(2, members.Value.Count);
+			}
+			finally
+			{
+				service.DeleteList(new DeleteListOptions() { ListId = list.Value.Id });
 			}
 		}
 
@@ -1351,6 +1406,9 @@ namespace TweetSharp.Tests.Service
 
 		private TwitterService GetAuthenticatedService(JsonSerializer serializer)
 		{
+			System.Net.ServicePointManager.Expect100Continue = false;
+			System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
 			var service = new TwitterService(_consumerKey, _consumerSecret);
 			if (serializer != null)
 			{
