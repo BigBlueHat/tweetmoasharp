@@ -1051,7 +1051,7 @@ namespace TweetSharp.Tests.Service
 		}
 
 		[Test]
-		public void Can_parse_fulltext_as_html_when()
+		public void Can_parse_fulltext_as_html_when_tweetmodeisextended()
 		{
 			var service = GetAuthenticatedService();
 			var tweet = service.GetTweet(new GetTweetOptions() { Id = 637228279825608706, TweetMode = TweetMode.Extended });
