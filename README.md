@@ -7,6 +7,9 @@ This repository includes the latest code from the TweetSharp repository (which i
 
 [![NuGet Badge](https://buildstats.info/nuget/TweetMoaSharp)](https://www.nuget.org/packages/TweetMoaSharp/)
 
+#### TLS 1.2 Now Required
+Twitter now requires TLS 1.2 for all API calls. Ensure the OS and .Net platform you're using enables this by default, or call the *EnableTls12* method of the *TwitterService* object to attempt to enable it. Note, this may affect other network calls made via .Net in the same process, as it modifies the global *ServicePointManager* properties.
+
 #### Async Auth Examples
 
 A number of people struggle with using TweetMoaSharp on platforms such as Windows Phone, WinRT and UWP because these platforms do NOT suppport "synchronous calls". Any call that involves I/O much be made "asynchronously" so it doesn't block the UI thread. Since most TweetMoaSharp methods access the network, you must use the async versions of those methods on these platforms. 

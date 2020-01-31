@@ -23,6 +23,13 @@ namespace TweetSharp
 		internal TwitterResponse(RestResponseBase response, Exception exception = null)
 		{
 			_exception = exception;
+			if (exception == null && response?.InnerException is WebException wex && wex.Status == WebExceptionStatus.ProtocolError)
+			{
+				//'Not Found' should return null instead of throwing.
+				if (wex.Response is HttpWebResponse httpResponse && httpResponse.StatusCode != HttpStatusCode.NotFound)
+					_exception = response.InnerException;
+			}
+
 			_response = response;
 		}
 

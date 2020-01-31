@@ -284,6 +284,27 @@ namespace TweetSharp
 			}
 		}
 
+		/// <summary>
+		/// Attempst to enable TLS 1.2. This will affect most/all .Net networking components as it modifies <see cref="System.Net.ServicePointManager.SecurityProtocol"/>.
+		/// </summary>
+		/// <remarks>
+		/// <para>This should work even if you've targed .Net 2/3.5/4.0 or another platform that doesn't natively have the <see cref="System.Net.ServicePointManager.SecurityProtocol.Tls12"/> value.
+		/// It does require that either a later but compatible version of .Net is installed (i.e .Net 4.5) or that appropriate registry edits/OS changes have been made to enable support.</para>
+		/// <para>This method should enable TLS 1.2, but not remove or add support for any other protocols.</para>
+		/// </remarks>
+		public void EnableTls12()
+		{
+			//.Net 4.0 and other older .Net implementations don't contain the TLS enum value, but converting the expected numeric value (3072)
+			//to the enum type works, so long as either a later .Net version is installed, or the machine 
+			//has had registry edits & patches to enable that protocol. Either way, we need to ensure TLS 1.2 is turned on
+			//in System.Net.ServicePointManager.SecurityProtocol.
+			var tls12 = (System.Net.SecurityProtocolType)3072;
+			if ((System.Net.ServicePointManager.SecurityProtocol & tls12) != tls12)
+			{
+				System.Net.ServicePointManager.SecurityProtocol = (System.Net.ServicePointManager.SecurityProtocol | tls12);
+			}
+		}
+
 		public T Deserialize<T>(ITwitterModel model) where T : ITwitterModel
 		{
 			return Deserialize<T>(model.RawSource);
@@ -735,7 +756,9 @@ namespace TweetSharp
 			var response = client.Request<T>(request);
 
 			SetResponse(response);
-
+			if (response.InnerException != null && response.StatusCode != HttpStatusCode.NotFound)
+				throw new WebException(response.InnerException.Message, response.InnerException);
+				
 			var entity = response.ContentEntity;
 			return entity;
 		}
@@ -752,7 +775,10 @@ namespace TweetSharp
 					{
 						try
 						{
-							tcs.SetResult(new TwitterAsyncResult<T1>(v, r));
+							if (r.InnerException != null)
+								tcs.TrySetException(r.InnerException);
+							else
+								tcs.SetResult(new TwitterAsyncResult<T1>(v, r));
 						}
 						catch (Exception ex)
 						{
@@ -782,7 +808,10 @@ namespace TweetSharp
 					{
 						try
 						{
-							tcs.SetResult(new TwitterAsyncResult<T1>(v, r));
+							if (r.InnerException != null)
+								tcs.TrySetException(r.InnerException);
+							else
+								tcs.SetResult(new TwitterAsyncResult<T1>(v, r));
 						}
 						catch (Exception ex)
 						{
@@ -812,7 +841,10 @@ namespace TweetSharp
 				{
 					try
 					{
-						tcs.SetResult(new TwitterAsyncResult<T1>(v, r));
+						if (r.InnerException != null)
+							tcs.TrySetException(r.InnerException);
+						else
+							tcs.SetResult(new TwitterAsyncResult<T1>(v, r));
 					}
 					catch (Exception ex)
 					{
@@ -873,7 +905,10 @@ namespace TweetSharp
 							{
 								try
 								{
-									tcs.SetResult(new TwitterAsyncResult<T1>(v, r));
+									if (r.InnerException != null)
+										tcs.TrySetException(r.InnerException);
+									else
+										tcs.SetResult(new TwitterAsyncResult<T1>(v, r));
 								}
 								catch (Exception ex)
 								{

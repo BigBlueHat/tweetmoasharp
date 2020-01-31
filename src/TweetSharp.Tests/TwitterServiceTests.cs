@@ -97,7 +97,16 @@ namespace TweetSharp.Tests.Service
 		public void Can_get_mentions_and_fail_due_to_unauthorized_request()
 		{
 			var service = new TwitterService();
-			var mentions = service.ListTweetsMentioningMe(new ListTweetsMentioningMeOptions());
+			System.Net.ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+
+			IEnumerable<TwitterStatus> mentions = null;
+			Assert.Throws<WebException>
+			(
+				() =>
+				{
+					mentions = service.ListTweetsMentioningMe(new ListTweetsMentioningMeOptions());
+				}
+			);
 
 			Assert.AreEqual(HttpStatusCode.BadRequest, service.Response.StatusCode);
 			Assert.IsNull(mentions);
@@ -379,8 +388,16 @@ namespace TweetSharp.Tests.Service
 		{
 			var service = GetAuthenticatedService();
 
-			service.SendTweet(new SendTweetOptions { Status = "Can_tweet_and_handle_dupes:Tweet" });
-			var response = service.SendTweet(new SendTweetOptions { Status = "Can_tweet_and_handle_dupes:Tweet" });
+			var statusText = System.Guid.NewGuid().ToString() + " Can_tweet_and_handle_dupes";
+			var x1 = service.SendTweet(new SendTweetOptions { Status = statusText });
+
+			TwitterStatus response = null;
+			Assert.Throws<WebException>(
+				() =>
+				{
+					response = service.SendTweet(new SendTweetOptions { Status = statusText });
+				}
+			);
 
 			Assert.IsNull(response);
 			Assert.IsNotNull(service.Response);
@@ -1225,7 +1242,7 @@ namespace TweetSharp.Tests.Service
 		}
 
 		[Test]
-		public async Task Can_add_listusersasync()
+		public async Task Can_add_listuserasync()
 		{
 			var service = GetAuthenticatedService();
 			var list = await service.CreateListAsync(new CreateListOptions() { Name = "SecondTestList" });
@@ -1238,7 +1255,7 @@ namespace TweetSharp.Tests.Service
 				Thread.Sleep(50); // Twitter needs a little time to update the list
 				var members = await service.ListListMembersAsync(new ListListMembersOptions() { ListId = result.Value.Id });
 				Assert.IsNotNull(members);
-				Assert.AreEqual(2, members.Value.Count);
+				Assert.AreEqual(1, members.Value.Count);
 			}
 			finally
 			{

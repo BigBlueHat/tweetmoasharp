@@ -473,20 +473,20 @@ namespace TweetSharp
 		public long? UserId { get; set; } 			
 	}			
  
-    		
+    [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]		
 	public class ListSuggestedUsersOptions
 	{ 
 		public string Slug { get; set; }  
 		public string Lang { get; set; } 			
 	}			
  
-    		
+    [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]		
 	public class ListSuggestedUserCategoriesOptions
 	{ 
 		public string Lang { get; set; } 			
 	}			
  
-    		
+    [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]		
 	public class GetSuggestedUserMembersOptions
 	{ 
 		public string Slug { get; set; } 			
@@ -1005,15 +1005,15 @@ namespace TweetSharp
 		ProfileBanners GetProfileBannerFor(GetProfileBannerForOptions options);	
 
  
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		TwitterUserSuggestions ListSuggestedUsers(ListSuggestedUsersOptions options);	
 
  
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		IEnumerable<TwitterUserSuggestions> ListSuggestedUserCategories(ListSuggestedUserCategoriesOptions options);	
 
  
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		IEnumerable<TwitterUser> GetSuggestedUserMembers(GetSuggestedUserMembersOptions options);	
 
  
@@ -1315,13 +1315,13 @@ namespace TweetSharp
         
 		IAsyncResult GetProfileBannerFor(GetProfileBannerForOptions options, Action<ProfileBanners, TwitterResponse>  action);
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		IAsyncResult ListSuggestedUsers(ListSuggestedUsersOptions options, Action<TwitterUserSuggestions, TwitterResponse>  action);
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		IAsyncResult ListSuggestedUserCategories(ListSuggestedUserCategoriesOptions options, Action<IEnumerable<TwitterUserSuggestions>, TwitterResponse>  action);
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		IAsyncResult GetSuggestedUserMembers(GetSuggestedUserMembersOptions options, Action<IEnumerable<TwitterUser>, TwitterResponse>  action);
 
         
@@ -1806,21 +1806,21 @@ namespace TweetSharp
 
 		ProfileBanners EndGetProfileBannerFor(IAsyncResult result, TimeSpan timeout);
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		IAsyncResult BeginListSuggestedUsers(ListSuggestedUsersOptions options);
 
 		TwitterUserSuggestions EndListSuggestedUsers(IAsyncResult result);		
 
 		TwitterUserSuggestions EndListSuggestedUsers(IAsyncResult result, TimeSpan timeout);
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		IAsyncResult BeginListSuggestedUserCategories(ListSuggestedUserCategoriesOptions options);
 
 		IEnumerable<TwitterUserSuggestions> EndListSuggestedUserCategories(IAsyncResult result);		
 
 		IEnumerable<TwitterUserSuggestions> EndListSuggestedUserCategories(IAsyncResult result, TimeSpan timeout);
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		IAsyncResult BeginGetSuggestedUserMembers(GetSuggestedUserMembersOptions options);
 
 		IEnumerable<TwitterUser> EndGetSuggestedUserMembers(IAsyncResult result);		
@@ -2225,13 +2225,13 @@ namespace TweetSharp
         
 		void GetProfileBannerFor(GetProfileBannerForOptions options, Action<ProfileBanners, TwitterResponse>  action);
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		void ListSuggestedUsers(ListSuggestedUsersOptions options, Action<TwitterUserSuggestions, TwitterResponse>  action);
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		void ListSuggestedUserCategories(ListSuggestedUserCategoriesOptions options, Action<IEnumerable<TwitterUserSuggestions>, TwitterResponse>  action);
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		void GetSuggestedUserMembers(GetSuggestedUserMembersOptions options, Action<IEnumerable<TwitterUser>, TwitterResponse>  action);
 
         
@@ -2500,13 +2500,13 @@ namespace TweetSharp
         
 
 		 Task<TwitterAsyncResult<ProfileBanners>> GetProfileBannerForAsync(GetProfileBannerForOptions options);
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 
 		 Task<TwitterAsyncResult<TwitterUserSuggestions>> ListSuggestedUsersAsync(ListSuggestedUsersOptions options);
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 
 		 Task<TwitterAsyncResult<IEnumerable<TwitterUserSuggestions>>> ListSuggestedUserCategoriesAsync(ListSuggestedUserCategoriesOptions options);
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 
 		 Task<TwitterAsyncResult<IEnumerable<TwitterUser>>> GetSuggestedUserMembersAsync(GetSuggestedUserMembersOptions options);
         
@@ -3248,7 +3248,7 @@ namespace TweetSharp
 				return WithHammock<ProfileBanners>(_client, "users/profile_banner", FormatAsString, "?screen_name=", screen_name, "&user_id=", user_id);
 				}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual TwitterUserSuggestions ListSuggestedUsers(ListSuggestedUsersOptions options)
 		{
 							var slug = options.Slug;
@@ -3258,7 +3258,7 @@ namespace TweetSharp
 				return WithHammock<TwitterUserSuggestions>(_client, "/users/suggestions/{slug}", FormatAsString, "?slug=", slug, "&lang=", lang);
 				}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IEnumerable<TwitterUserSuggestions> ListSuggestedUserCategories(ListSuggestedUserCategoriesOptions options)
 		{
 							var lang = options.Lang;
@@ -3267,7 +3267,7 @@ namespace TweetSharp
 				return WithHammock<IEnumerable<TwitterUserSuggestions>>(_client, "users/suggestions", FormatAsString, "?lang=", lang);
 				}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IEnumerable<TwitterUser> GetSuggestedUserMembers(GetSuggestedUserMembersOptions options)
 		{
 							var slug = options.Slug;
@@ -4360,7 +4360,7 @@ namespace TweetSharp
 			return  WithHammock<ProfileBanners>(_client, action, "users/profile_banner", FormatAsString, "?screen_name=", screen_name, "&user_id=", user_id);
 					}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IAsyncResult ListSuggestedUsers(ListSuggestedUsersOptions options, Action<TwitterUserSuggestions, TwitterResponse>  action)
 		{
 
@@ -4371,7 +4371,7 @@ namespace TweetSharp
 			return  WithHammock<TwitterUserSuggestions>(_client, action, "/users/suggestions/{slug}", FormatAsString, "?slug=", slug, "&lang=", lang);
 					}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IAsyncResult ListSuggestedUserCategories(ListSuggestedUserCategoriesOptions options, Action<IEnumerable<TwitterUserSuggestions>, TwitterResponse>  action)
 		{
 
@@ -4381,7 +4381,7 @@ namespace TweetSharp
 			return  WithHammock<IEnumerable<TwitterUserSuggestions>>(_client, action, "users/suggestions", FormatAsString, "?lang=", lang);
 					}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IAsyncResult GetSuggestedUserMembers(GetSuggestedUserMembersOptions options, Action<IEnumerable<TwitterUser>, TwitterResponse>  action)
 		{
 
@@ -5454,7 +5454,7 @@ namespace TweetSharp
 			return BeginWithHammock<ProfileBanners>(_client, WebMethod.Get, "users/profile_banner", FormatAsString, "?screen_name=", screen_name, "&user_id=", user_id);
 					}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IAsyncResult BeginListSuggestedUsers(ListSuggestedUsersOptions options)
 		{
 						var slug = options.Slug;
@@ -5464,7 +5464,7 @@ namespace TweetSharp
 			return BeginWithHammock<TwitterUserSuggestions>(_client, WebMethod.Get, "/users/suggestions/{slug}", FormatAsString, "?slug=", slug, "&lang=", lang);
 					}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IAsyncResult BeginListSuggestedUserCategories(ListSuggestedUserCategoriesOptions options)
 		{
 						var lang = options.Lang;
@@ -5473,7 +5473,7 @@ namespace TweetSharp
 			return BeginWithHammock<IEnumerable<TwitterUserSuggestions>>(_client, WebMethod.Get, "users/suggestions", FormatAsString, "?lang=", lang);
 					}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IAsyncResult BeginGetSuggestedUserMembers(GetSuggestedUserMembersOptions options)
 		{
 						var slug = options.Slug;
@@ -6530,37 +6530,37 @@ namespace TweetSharp
 			return EndWithHammock<ProfileBanners>(result, timeout);
 		}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual TwitterUserSuggestions EndListSuggestedUsers(IAsyncResult result) 
 		{
 			return EndWithHammock<TwitterUserSuggestions>(result);
 		}
 
-		
+		[Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual TwitterUserSuggestions EndListSuggestedUsers(IAsyncResult result, TimeSpan timeout) 
 		{
 			return EndWithHammock<TwitterUserSuggestions>(result, timeout);
 		}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IEnumerable<TwitterUserSuggestions> EndListSuggestedUserCategories(IAsyncResult result) 
 		{
 			return EndWithHammock<IEnumerable<TwitterUserSuggestions>>(result);
 		}
 
-		
+		[Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IEnumerable<TwitterUserSuggestions> EndListSuggestedUserCategories(IAsyncResult result, TimeSpan timeout) 
 		{
 			return EndWithHammock<IEnumerable<TwitterUserSuggestions>>(result, timeout);
 		}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IEnumerable<TwitterUser> EndGetSuggestedUserMembers(IAsyncResult result) 
 		{
 			return EndWithHammock<IEnumerable<TwitterUser>>(result);
 		}
 
-		
+		[Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual IEnumerable<TwitterUser> EndGetSuggestedUserMembers(IAsyncResult result, TimeSpan timeout) 
 		{
 			return EndWithHammock<IEnumerable<TwitterUser>>(result, timeout);
@@ -7543,7 +7543,7 @@ namespace TweetSharp
 			WithHammock<ProfileBanners>(_client, action, "users/profile_banner", FormatAsString, "?screen_name=", screen_name, "&user_id=", user_id);
 		}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual void ListSuggestedUsers(ListSuggestedUsersOptions options, Action<TwitterUserSuggestions, TwitterResponse>  action)
 		{
 			var slug = options.Slug;
@@ -7552,7 +7552,7 @@ namespace TweetSharp
 			WithHammock<TwitterUserSuggestions>(_client, action, "/users/suggestions/{slug}", FormatAsString, "?slug=", slug, "&lang=", lang);
 		}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual void ListSuggestedUserCategories(ListSuggestedUserCategoriesOptions options, Action<IEnumerable<TwitterUserSuggestions>, TwitterResponse>  action)
 		{
 			var lang = options.Lang;
@@ -7560,7 +7560,7 @@ namespace TweetSharp
 			WithHammock<IEnumerable<TwitterUserSuggestions>>(_client, action, "users/suggestions", FormatAsString, "?lang=", lang);
 		}
 
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual void GetSuggestedUserMembers(GetSuggestedUserMembersOptions options, Action<IEnumerable<TwitterUser>, TwitterResponse>  action)
 		{
 			var slug = options.Slug;
@@ -8512,7 +8512,7 @@ namespace TweetSharp
 			
 			return WithHammockTask<ProfileBanners>(_client, "users/profile_banner", FormatAsString, "?screen_name=", screen_name, "&user_id=", user_id);
 					}
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual  Task<TwitterAsyncResult<TwitterUserSuggestions>> ListSuggestedUsersAsync(ListSuggestedUsersOptions options)
 		{
 
@@ -8521,7 +8521,7 @@ namespace TweetSharp
 			
 			return WithHammockTask<TwitterUserSuggestions>(_client, "/users/suggestions/{slug}", FormatAsString, "?slug=", slug, "&lang=", lang);
 					}
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual  Task<TwitterAsyncResult<IEnumerable<TwitterUserSuggestions>>> ListSuggestedUserCategoriesAsync(ListSuggestedUserCategoriesOptions options)
 		{
 
@@ -8529,7 +8529,7 @@ namespace TweetSharp
 			
 			return WithHammockTask<IEnumerable<TwitterUserSuggestions>>(_client, "users/suggestions", FormatAsString, "?lang=", lang);
 					}
-        
+        [Obsolete("Twitter has declared this method obsolete; it may cease to function at any time. Check https://dev.twitter.com/docs/api#deprecated for alternatives.")]
 		public virtual  Task<TwitterAsyncResult<IEnumerable<TwitterUser>>> GetSuggestedUserMembersAsync(GetSuggestedUserMembersOptions options)
 		{
 

@@ -120,12 +120,24 @@ namespace TweetSharp
 		private const string AuthorizeUrl = Globals.Authority + "/oauth/authorize";
 		private const string AuthenticateUrl = Globals.Authority + "/oauth/authenticate";
 
+		/// <summary>
+		/// Note: Twitter now requires TLS 1.2. Ensure you running on an OS and .Net platform that enables this by default or call the <see cref="EnableTls12"/> method.
+		/// </summary>
+		/// <param name="token"></param>
+		/// <param name="tokenSecret"></param>
 		public virtual void AuthenticateWith(string token, string tokenSecret)
 		{
 			_token = token;
 			_tokenSecret = tokenSecret;
 		}
 
+		/// <summary>
+		/// Note: Twitter now requires TLS 1.2. Ensure you running on an OS and .Net platform that enables this by default or call the <see cref="EnableTls12"/> method.
+		/// </summary>
+		/// <param name="consumerKey"></param>
+		/// <param name="consumerSecret"></param>
+		/// <param name="token"></param>
+		/// <param name="tokenSecret"></param>
 		public virtual void AuthenticateWith(string consumerKey, string consumerSecret, string token, string tokenSecret)
 		{
 			_consumerKey = consumerKey;
