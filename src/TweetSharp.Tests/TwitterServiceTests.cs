@@ -656,21 +656,6 @@ namespace TweetSharp.Tests.Service
 		}
 
 		[Test]
-		public void Can_ListSuggestedUsers()
-		{
-			var service = GetAuthenticatedService();
-			var results = service.ListSuggestedUsers(new ListSuggestedUsersOptions() { Lang = "en", Slug = "television" });
-
-			Assert.IsNotNull(results);
-			Assert.IsTrue(results.Users.Any());
-
-			foreach (var user in results.Users)
-			{
-				Console.WriteLine("Suggested; {0}", user.ScreenName);
-			}
-		}
-
-		[Test]
 		public void Can_search_with_geo_and_lang()
 		{
 			var italyGeoCode = new TwitterGeoLocationSearch(41.9, 12.5, 10, TwitterGeoLocationSearch.RadiusType.Mi);
@@ -744,33 +729,6 @@ namespace TweetSharp.Tests.Service
 
 			Assert.IsNotNull(friendship);
 			Assert.IsNotNull(friendship.Relationship);
-		}
-
-		[Test]
-		public void Can_get_user_suggestion_categories_and_users()
-		{
-			Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-
-			var service = GetAuthenticatedService();
-			var categories = service.ListSuggestedUserCategories(new ListSuggestedUserCategoriesOptions());
-			Assert.IsNotNull(categories);
-			Assert.IsTrue(categories.Count() > 0);
-
-			foreach (var category in categories)
-			{
-				Trace.WriteLine(category.RawSource);
-				Trace.WriteLine(string.Format("{0}({1})", category.Name, category.Slug));
-			}
-
-			var suggestions = service.ListSuggestedUsers(new ListSuggestedUsersOptions() { Slug = categories.First().Slug });
-			Assert.IsNotNull(suggestions);
-			Assert.IsNotNull(suggestions.Users);
-			Assert.IsTrue(suggestions.Users.Count() > 0);
-
-			foreach (var user in suggestions.Users)
-			{
-				Trace.WriteLine(user.ScreenName);
-			}
 		}
 
 		[Test]
