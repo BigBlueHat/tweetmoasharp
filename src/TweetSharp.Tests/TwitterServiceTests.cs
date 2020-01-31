@@ -1193,7 +1193,7 @@ namespace TweetSharp.Tests.Service
 
 				var result = await service.AddListMemberAsync(new AddListMemberOptions() { ListId = list.Value.Id, ScreenName ="yortw" });
 				Assert.IsNotNull(result);
-				Thread.Sleep(50); // Twitter needs a little time to update the list
+				Thread.Sleep(1000); // Twitter needs a little time to update the list
 				var members = await service.ListListMembersAsync(new ListListMembersOptions() { ListId = result.Value.Id });
 				Assert.IsNotNull(members);
 				Assert.AreEqual(2, members.Value.Count);
